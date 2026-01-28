@@ -4,23 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
+    /**
+     * All about the business itself
+     * 
+     * Name of business
+     * 
+     * Address 
+     * 
+     * Contact of the Business
+     */
+    
 class BusinessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        /**
+         * Creating business info
+         * Return a view for creating a business
+         */
+
+       // return view('business.create');
+
     }
 
     /**
@@ -28,38 +37,27 @@ class BusinessController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        /**
+         * Storing the business info
+         * 
+         * In refactoring stage, put the Store Business Request
+         */
+    
+        $validated = $request->validate([
+        'name' => ['required', 'string', 'min:4'],
+        'address' => ['required', 'string', 'max:255'],
+        'contact' => ['required', 'string', 'max:11'],
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Business $business)
-    {
-        //
-    }
+        // Store the business 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Business $business)
-    {
-        //
-    }
+        $business = Business::create($validated);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Business $business)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Business $business)
-    {
-        //
+         // update([]) is used to change the business_id in the users table
+         Auth::user()->update([
+            'business_id' => $business->id,
+         ]);
+    
+         return redirect()->route('dashboard');
     }
 }
