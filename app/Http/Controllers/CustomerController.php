@@ -20,8 +20,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::where('business_id', Auth::user()->business_id)
-        ->get();
+        $customers = Customer::where('business_id', 
+        Auth::user()->business_id)->get();
 
         //return view('customers.index', compact('customers));
     }

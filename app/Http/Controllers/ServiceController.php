@@ -30,7 +30,7 @@ class ServiceController extends Controller
         $services = Service::where('business_id', 
         Auth::user()->business_id)->get();
 
-        // return redirect the view for service and compact the services
+        // return view service
     }
 
 

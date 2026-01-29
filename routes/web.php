@@ -1,11 +1,18 @@
 <?php
 
+use App\Http\Controllers\ServiceJobController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/jobs', [ServiceJobController::class, 'index']);
+});
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

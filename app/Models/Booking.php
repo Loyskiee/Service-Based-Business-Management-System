@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceJob extends Model
 {
     protected $fillable = [
-         'business_id',
+        'business_id',
         'customer_id',
         'service_id',
         'user_id',

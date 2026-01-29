@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
  * 
  * When was the schedule given, etc.
  */
-class ServiceJobController extends Controller
+class BookingController extends Controller
 {
     /**
      * Display a listing of the resource.
