@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreBusinessRequest;
 use Illuminate\Support\Facades\Auth;
 
     /**
@@ -35,7 +35,7 @@ class BusinessController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store (StoreBusinessRequest $request)
     {
         /**
          * Storing the business info
@@ -43,14 +43,10 @@ class BusinessController extends Controller
          * In refactoring stage, put the Store Business Request
          */
     
-        $validated = $request->validate([
-        'name' => ['required', 'string', 'min:4'],
-        'address' => ['required', 'string', 'max:255'],
-        'contact' => ['required', 'string', 'max:11'],
-        ]);
+        // Validate the request
+        $validated = $request->validated();
 
         // Store the business 
-
         $business = Business::create($validated);
 
          // update([]) is used to change the business_id in the users table
