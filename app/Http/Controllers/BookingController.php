@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ServiceJob;
-use Illuminate\Http\Request;
+
+use App\Http\Requests\StoreBookingRequest;
+use App\Repositories\Interfaces\BookingRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
  */
 class BookingController extends Controller
 {
+
+    public function __construct(protected BookingRepositoryInterface $bookingRepo) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -26,32 +30,34 @@ class BookingController extends Controller
          *  wherein you will get the authenticated business_id
          */
 
-        $serviceJob = ServiceJob::with(['customer', 'service', 'user'])
-        ->where('business_id', Auth::user()->business_id)
-        ->get();
+            $bookings = $this->bookingRepo->findByBusinessId(
+            Auth::user()->business_id
+        );
+
+       // return view for booking index
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBookingRequest $request)
     {
         // validate the request
-        $validated = $request->validate([
-            'customer_id'  => 'required|exists:customers,id',
-            'service_id'   => 'required|exists:services,id',
-            'scheduled_at' => 'required|date',
-        ]);
+       $validated = $request->validated();
+        
+        // Add business context and defaults
+        $validated['business_id'] = Auth::user()->business_id;
+        $validated['user_id'] = Auth::id();
+        $validated['status'] = $validated['status'] ?? 'pending';
+        
+        $booking = $this->bookingRepo->create($validated);
 
-        // create the request
-        ServiceJob::create([$validated, 
-        'business_id' => Auth::user()->business_id,
-        'user_id' => Auth::id(),
-        'status' => 'pending'
-        ]);
-
-        return back();
+        //return view
     }
 
-    
+    // edit
+
+    // update
+
+    // delete
 }
