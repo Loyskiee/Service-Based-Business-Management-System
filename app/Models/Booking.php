@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceJob extends Model
+class Booking extends Model
 {
+
+    /**
+     * Add pay, cancel, and complete behavior
+     */
     protected $fillable = [
         'business_id',
         'customer_id',

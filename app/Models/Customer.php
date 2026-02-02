@@ -19,8 +19,8 @@ class Customer extends Model
         return $this->belongsTo(Business::class);
     }
 
-    public function serviceJobs():HasMany
+    public function booking():HasMany
     {
-        return $this->hasMany(ServiceJob::class);
+        return $this->hasMany(Booking::class);
     }
 }

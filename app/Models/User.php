@@ -58,8 +58,8 @@ class User extends Authenticatable
         return $this->belongsTo(Business::class);
     }
 
-    public function serviceJob():HasMany
+    public function booking():HasMany
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Booking::class);
     }
 }

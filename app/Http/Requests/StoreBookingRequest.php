@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreServiceJobRequest extends FormRequest
+class StoreBookingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,9 @@ class StoreServiceJobRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'customer_id'  => 'required|exists:customers,id',
+            'service_id'   => 'required|exists:services,id',
+            'scheduled_at' => 'required|date',
         ];
     }
 }

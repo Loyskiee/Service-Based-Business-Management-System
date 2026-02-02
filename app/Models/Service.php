@@ -20,8 +20,8 @@ class Service extends Model
         return $this->belongsTo(Business::class);
     }     
 
-    public function serviceJob():HasMany
+    public function booking():HasMany
     {
-        return $this->hasMany(ServiceJob::class);
+        return $this->hasMany(Booking::class);
     }
 }

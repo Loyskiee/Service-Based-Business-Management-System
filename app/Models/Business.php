@@ -13,23 +13,23 @@ class Business extends Model
         'contact',
     ];
 
-    public function users():HasMany
+    public function user():HasMany
     {
         return $this->hasMany(User::class);
     }
 
-    public function customers():HasMany
+    public function customer():HasMany
     {
         return $this->hasMany(Customer::class);
     }
 
-    public function services():HasMany
+    public function service():HasMany
     {
         return $this->hasMany(Service::class);
     }
 
-    public function serviceJob():HasMany
+    public function boking():HasMany
     {
-        return $this->hasMany(ServiceJob::class);
+        return $this->hasMany(Booking::class);
     }
 }

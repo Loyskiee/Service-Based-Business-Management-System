@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,19 +38,20 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         // validate the request
-        $validated = $request->validate([
-            'service_name' => ['required', 'string', 'min:5'],
-            'price' => ['required', 'numeric']
-        ]);
+        $validated = $request->validated();
 
+        $validated['business_id'] = Auth::user()->business_id;
         // create the request
-            Service::create([$validated, 
-        'business_id' => Auth::user()->business_id,]);
+        Service::create($validated);    
 
         return back();
     }
 
+
+    // add edit later
+
+    // add delete later
 }

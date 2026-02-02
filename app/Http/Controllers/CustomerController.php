@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::where('business_id', 
-        Auth::user()->business_id)->get();
+        $customer = Customer::where('business_id', Auth::user()->business_id)
+        ->get();
 
         //return view('customers.index', compact('customers));
     }
@@ -29,17 +30,18 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCustomerRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'min:2'],
-            'contact' => ['required', 'string', 'max:11']
-        ]);
 
-        Customer::create([$validated, 
-        'business_id' => Auth::user()->business_id,]);
+        $validated = $request->validated();
+        $validated['business_id'] = Auth::user()->business_id; // add the business_id to the validated datas
+        Customer::create($validated);
 
-        return back()->with('Customer Created!'); // back method is used to generate redirect reponse that sends back the user to the previous location
+        return back()->with('success', 'Customer Created!'); // back method is used to generate redirect reponse that sends back the user to the previous location
     }
 
+
+    // add edit later
+
+    // add delete later
 }
