@@ -3,11 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\ServiceController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,8 +24,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'business_id',
-        'role',
     ];
 
     /**
@@ -58,8 +54,13 @@ class User extends Authenticatable
         return $this->belongsTo(Business::class);
     }
 
-    public function booking():HasMany
+    public function bookings():HasMany
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function roles():BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
     }
 }

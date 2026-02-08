@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // determines what is the role of the user
         Schema::create('roles', function (Blueprint $table){
             $table->id();
-            $table->string('name')->unique(); //owner or staff 
+            $table->string('name')->unique(); //admin, staff, owner
+            $table->timestamps();
         });
     }
 

@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Notifications\Notifiable;
 
 class Booking extends Model
 {
-
+    use HasFactory, Notifiable;
     /**
      * Add pay, cancel, and complete behavior
      */
@@ -23,22 +26,22 @@ class Booking extends Model
         'scheduled_at' => 'datetime',
     ];
 
-    public function business()
+    public function business(): BelongsTo
     {
         return $this->belongsTo(Business::class);
     }
 
-    public function customer()
+    public function customer():BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
 
-    public function service()
+    public function service():BelongsTo
     {
         return $this->belongsTo(Service::class);
     }
 
-    public function user()
+    public function user():BelongsTo
     {
         return $this->belongsTo(User::class);
     }
