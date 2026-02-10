@@ -9,7 +9,6 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Business;
 use App\Models\Customer;
-use App\Models\Role;
 use App\Models\Service;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,8 +24,7 @@ class DataSeeder extends Seeder
     public function run(): void
     {
         
-       $admin = Role::firstOrCreate(['name' => 'admin']);
-       $staff = Role::firstOrCreate(['name' => 'staff']);
+
 
 
        $business =  Business::create([
@@ -36,12 +34,13 @@ class DataSeeder extends Seeder
         ]);
         
          // create an user as admin
-        $adminUser = User::factory()->for($business)->create();
-        $adminUser->roles()->attach($admin);
+        $adminUser = User::factory()->for($business)->create([
+            'role' => 'admin'
+         ]);
 
          // create an user as staff
-        $staffUser = User::factory()->for($business)->create();
-        $staffUser->roles()->attach($staff);
+       $staffUsers =  User::factory()->count(3)->for($business)->create();
+       
 
 
         $customer = Customer::factory()->for($business)->create();
@@ -57,7 +56,7 @@ class DataSeeder extends Seeder
         'business_id'  => $business->id,
         'customer_id'  => $customer->id,
         'service_id'   => $service->id,
-        'user_id'      => $staffUser->id,
+        'user_id'      => $staffUsers->random()->id,
         'status'       => BookingStatus::Completed->value,
         'scheduled_at' => now(),
         ]);
