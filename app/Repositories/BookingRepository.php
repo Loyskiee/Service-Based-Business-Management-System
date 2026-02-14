@@ -6,10 +6,10 @@ use App\Models\Booking;
 use App\Repositories\Interfaces\BookingRepositoryInterface;
 
 /**
- * Implementation of Booking Repository Interface
+ * Implementation of Base Repository
  */
 
-    class BookingRepository implements BookingRepositoryInterface
+    class BookingRepository extends Repository
     {
 
         public function __construct(protected Booking $booking){}
