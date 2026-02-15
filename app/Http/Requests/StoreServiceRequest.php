@@ -23,7 +23,7 @@ class StoreServiceRequest extends FormRequest
     {
         return [
             'service_name' => ['required', 'string', 'min:5'],
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'string'],
         ];
     }
 }
