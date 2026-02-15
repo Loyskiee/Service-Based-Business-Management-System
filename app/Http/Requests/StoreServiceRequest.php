@@ -11,7 +11,7 @@ class StoreServiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,8 @@ class StoreServiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'service_name' => 'required'|'string'|'min:5',
-            'price' => 'required'|'numeric',
+            'service_name' => ['required', 'string', 'min:5'],
+            'price' => ['required', 'numeric'],
         ];
     }
 }

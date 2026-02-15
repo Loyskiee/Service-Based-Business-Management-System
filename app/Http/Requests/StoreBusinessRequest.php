@@ -22,9 +22,9 @@ class StoreBusinessRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required'|'string'|'min:4',
-            'address' => 'required'|'string'|'max:255',
-            'contact' => 'required'|'string'|'max:11',
+            'name' => ['required', 'string', 'min:4'],
+            'address' => ['required','string','max:255'],
+            'contact' => ['required', 'numeric', 'digits:11']
         ];
     }
 
