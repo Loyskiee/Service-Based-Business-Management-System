@@ -22,7 +22,10 @@ class UpdateBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // rules for updating the booking request?
+           'customer_id'  => ['required', 'exists:customers,id'],
+            'service_id'   => ['required, exists:services,id'],
+            'scheduled_at' => ['required', 'date'],
+             
         ];
     }
 }
