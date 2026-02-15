@@ -20,13 +20,13 @@ Route::middleware(['auth'])->group(function () {
 
     // OMS related routes
     Route::resource('customers', CustomerController::class) 
-    ->only('index', 'store'); 
+    ->only('index', 'create', 'store'); 
 
     Route::resource('services', ServiceController::class)
-    ->only('index', 'store');
+    ->only('index', 'create', 'store');
 
     Route::resource('bookings', BookingController::class)
-    ->only('index', 'store');
+    ->only('index', 'create', 'store');
 });
 
 
