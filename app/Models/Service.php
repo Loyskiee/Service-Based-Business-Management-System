@@ -13,7 +13,6 @@ class Service extends Model
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'business_id',
         'service_name',
         'price',
     ];

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\BookingStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +15,6 @@ class Booking extends Model
      * Add pay, cancel, and complete behavior
      */
     protected $fillable = [
-        'business_id',
         'customer_id',
         'service_id',
         'user_id',
@@ -24,6 +24,7 @@ class Booking extends Model
 
     protected $casts = [
         'scheduled_at' => 'datetime',
+        'status' => BookingStatus::class,
     ];
 
     public function business(): BelongsTo
