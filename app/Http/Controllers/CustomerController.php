@@ -49,4 +49,5 @@ class CustomerController extends Controller
                                           
         return back()->with('success', 'Customer Created!'); // back method is used to generate redirect reponse that sends back the user to the previous location
     }
+    
 }

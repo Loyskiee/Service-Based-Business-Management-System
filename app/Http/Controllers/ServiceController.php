@@ -50,5 +50,4 @@ class ServiceController extends Controller
         return back();
     }
 
-
 }
