@@ -27,4 +27,5 @@ class StoreBookingRequest extends FormRequest
             'scheduled_at' => ['required', 'date'],
         ];
     }
+    
 }

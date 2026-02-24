@@ -56,4 +56,5 @@ class BusinessController extends Controller
     
          return redirect()->route('dashboard');
     }
+    
 }

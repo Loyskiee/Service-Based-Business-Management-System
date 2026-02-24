@@ -26,4 +26,5 @@ class StoreCustomerRequest extends FormRequest
             'contact' => ['required', 'string', 'max:11'],
         ];
     }
+
 }

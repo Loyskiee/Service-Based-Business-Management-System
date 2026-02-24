@@ -26,4 +26,5 @@ class StoreServiceRequest extends FormRequest
             'price' => ['required', 'string'],
         ];
     }
+
 }

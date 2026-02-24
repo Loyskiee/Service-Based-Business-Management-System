@@ -24,9 +24,6 @@ class DataSeeder extends Seeder
     public function run(): void
     {
         
-
-
-
        $business =  Business::create([
             'name' => 'Kineme Shop',
             'address' => '123 Kineme Manila City',
@@ -52,15 +49,6 @@ class DataSeeder extends Seeder
             'price' => 150
         ]);
     
-        Booking::create([
-        'business_id'  => $business->id,
-        'customer_id'  => $customer->id,
-        'service_id'   => $service->id,
-        'user_id'      => $staffUsers->random()->id,
-        'status'       => BookingStatus::Completed->value,
-        'scheduled_at' => now(),
-        ]);
-
-       
-    }
+        
+  }
 }

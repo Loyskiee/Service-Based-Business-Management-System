@@ -31,6 +31,7 @@ class Business extends Model
     {
         return $this->hasMany(Service::class);
     }
+    
 
     public function bokings():HasMany
     {

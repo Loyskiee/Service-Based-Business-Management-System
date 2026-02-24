@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('scheduled_at');
             $table->timestamps();
         });
+        
     }
 
     /**
