@@ -31,4 +31,5 @@ class UpdateBookingRequest extends FormRequest
              
         ];
     }
+    
 }

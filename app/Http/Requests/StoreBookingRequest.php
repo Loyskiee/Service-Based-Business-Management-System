@@ -37,4 +37,5 @@ class StoreBookingRequest extends FormRequest
             'status.enum' => 'The selected status is invalid'
         ];
     }
+    
 }
