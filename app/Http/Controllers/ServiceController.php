@@ -34,10 +34,7 @@ class ServiceController extends Controller
         return view('service.index', compact('services'));
     }
 
-    public function create()
-    {
-        return view('service.create');
-    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -52,5 +49,6 @@ class ServiceController extends Controller
 
         return back();
     }
+
 
 }
