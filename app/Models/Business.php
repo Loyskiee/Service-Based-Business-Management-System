@@ -37,5 +37,6 @@ class Business extends Model
     {
         return $this->hasMany(Service::class);
     }
+    
 
 }
