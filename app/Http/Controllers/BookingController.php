@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\StoreBookingRequest;
-use App\Repositories\Interfaces\BookingRepositoryInterface;
+use App\Http\Requests\UpdateBookingRequest;
+use App\Models\Booking;
+use App\Models\Customer;
+use App\Models\Service;
+use App\Repositories\BookingRepository;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -17,24 +21,27 @@ use Illuminate\Support\Facades\Auth;
 class BookingController extends Controller
 {
 
-    public function __construct(protected BookingRepositoryInterface $bookingRepo) {}
+    public function __construct(protected BookingRepository $bookingRepo) {}
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        /**
-         * fetch the model with customer, service, and user
-         * 
-         *  wherein you will get the authenticated business_id
-         */
+        // Get list of bookings
+       $bookings = $this->bookingRepo->findByBusinessId(Auth::user()->business_id)
+       ->paginate(10);
 
-            $bookings = $this->bookingRepo->findByBusinessId(
-            Auth::user()->business_id
-        );
+       return view('booking.index', compact('bookings'));
+    }
 
-       // return view for booking index
+    public function create()
+    {
+        // Get the customer and services because it's fk
+       $customers = Customer::where('business_id', Auth::user()->business_id)->get();
+       $services  = Service::where('business_id', Auth::user()->business_id)->get();
+
+        return view('booking.create', compact('customers', 'services'));
     }
 
     /**
@@ -44,20 +51,42 @@ class BookingController extends Controller
     {
         // validate the request
        $validated = $request->validated();
-        
-        // Add business context and defaults
-        $validated['business_id'] = Auth::user()->business_id;
-        $validated['user_id'] = Auth::id();
-        $validated['status'] = $validated['status'] ?? 'pending';
-        
-        $booking = $this->bookingRepo->create($validated);
+       $validated['business_id'] = Auth::user()->business_id; // Automatic goes to the business
+       $validated['user_id'] = Auth::id();
 
-        //return view
+        $this->bookingRepo->create($validated);
+
+        return redirect()->route('bookings.index')
+        ->with('success', 'Booking created');
     }
 
-    // edit
+    /**
+     * Show a form for updating a booking
+     */
+    public function edit(Booking $booking) 
+    {
+        $customers = Customer::where('business_id', Auth::user()->business_id)->get();
+        $services = Service::where('business_id', Auth::user()->business_id)->get();
+      
+        return view('booking.edit', compact('booking','customers', 'services'));
+    }
 
-    // update
+    /**
+     * Update a specific booking
+     */
+    public function update(UpdateBookingRequest $request, Booking $booking)
+    {
+        $booking = $this->bookingRepo->update($booking->id, $request->validated());
+        return redirect()->route('bookings.index');
+    }
 
-    // delete
+    /**
+     * Delete specific booking
+     */
+     public function destroy(Booking $booking) 
+     {
+        $this->bookingRepo->delete($booking->id);
+
+        return redirect()->route('bookings.index');
+     }
 }
