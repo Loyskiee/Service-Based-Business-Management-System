@@ -44,6 +44,5 @@ class DataSeeder extends Seeder
             'price' => 150
         ]);
     
-        
   }
 }

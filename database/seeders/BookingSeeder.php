@@ -39,6 +39,6 @@ class BookingSeeder extends Seeder
             ->addDays(rand(-45, 90))           
             ->setTime(rand(8, 20), rand(0, 59)), 
        ]);
-    }
+        }
     }
 }
