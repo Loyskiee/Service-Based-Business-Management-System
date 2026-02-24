@@ -44,6 +44,5 @@
 </form>
 
 </x-app-layout>
-
 </body>
 </html>
