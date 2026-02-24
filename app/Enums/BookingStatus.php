@@ -4,10 +4,20 @@ namespace App\Enums;
 
 enum BookingStatus: string
 {    
-    // put the status here (pending, confirmed, cancelled, completed)
-    
+    // Status of the booking
     case Pending = 'pending';
     case Confirmed = 'confirmed';
     case Cancelled = 'cancelled';
     case Completed = 'completed';
+
+    // labels for status
+    public function label():string
+    {
+        return match($this) {
+            self::Pending => 'Pending',
+            self::Confirmed => 'Confirmed',
+            self::Cancelled => 'Cancelled',
+            self::Completed => 'Completed',
+        };
+    }
 }
