@@ -15,7 +15,6 @@ class Booking extends Model
      * Add pay, cancel, and complete behavior
      */
     protected $fillable = [
-        'business_id',
         'customer_id',
         'service_id',
         'user_id',

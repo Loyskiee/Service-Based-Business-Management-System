@@ -12,6 +12,8 @@ use App\Models\Customer;
 use App\Models\Service;
 use Illuminate\Support\Facades\Hash;
 
+use function Symfony\Component\Clock\now;
+
 class DataSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -21,6 +23,10 @@ class DataSeeder extends Seeder
      */
     public function run(): void
     {
+        
+
+
+
        $business =  Business::create([
             'name' => 'Kineme Shop',
             'address' => '123 Kineme Manila City',
@@ -33,17 +39,28 @@ class DataSeeder extends Seeder
          ]);
 
          // create an user as staff
-        User::factory()->count(3)->for($business)->create();
+       $staffUsers =  User::factory()->count(3)->for($business)->create();
        
-         Customer::factory()->for($business)->create();
+
+
+        $customer = Customer::factory()->for($business)->create();
         
        // Service of kineme shop
-        Service::create([
+        $service = Service::create([
             'business_id' => $business->id,
-            'service_name' => 'Example Service',
+            'service_name' => 'Haircut',
             'price' => 150
         ]);
     
-        
-  }
+        Booking::create([
+        'business_id'  => $business->id,
+        'customer_id'  => $customer->id,
+        'service_id'   => $service->id,
+        'user_id'      => $staffUsers->random()->id,
+        'status'       => BookingStatus::Completed->value,
+        'scheduled_at' => now(),
+        ]);
+
+       
+    }
 }

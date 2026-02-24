@@ -14,14 +14,6 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                         </x-nav-link>
-
-                        <x-nav-link :href="route('bookings.index')" :active="request()->routeIs('bookings.*')">
-                            {{ __('Bookings') }}
-                        </x-nav-link>
-
-                    <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
-                        {{ __('Customers') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -78,16 +70,6 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('bookings.index')" :active="request()->routeIs('bookings.*')">
-                {{ __('Bookings') }}
-            </x-responsive-nav-link>
-
-             <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
-                 {{ __('Customers') }}
-             </x-nav-link>
-
-            
         </div>
 
         <!-- Responsive Settings Options -->

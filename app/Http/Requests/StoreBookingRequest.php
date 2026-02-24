@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\BookingStatus;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class StoreBookingRequest extends FormRequest
 {
@@ -13,7 +11,7 @@ class StoreBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,16 +23,8 @@ class StoreBookingRequest extends FormRequest
     {
         return [
             'customer_id'  => ['required', 'exists:customers,id'],
-            'service_id'   => ['required', 'exists:services,id'],
+            'service_id'   => ['required, exists:services,id'],
             'scheduled_at' => ['required', 'date'],
-            'status' => ['sometimes', new Enum(BookingStatus::class)],
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'status.enum' => 'The selected status is invalid'
         ];
     }
 }

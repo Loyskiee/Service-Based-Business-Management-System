@@ -31,13 +31,10 @@ class ServiceController extends Controller
         $services = Service::where('business_id', 
         Auth::user()->business_id)->get();
 
-        return view('service.index', compact('services'));
+        // return view service
     }
 
-    public function create()
-    {
-        return view('service.create');
-    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -53,4 +50,8 @@ class ServiceController extends Controller
         return back();
     }
 
+
+    // add edit later
+
+    // add delete later
 }
