@@ -13,6 +13,7 @@ class Customer extends Model
     use HasFactory, Notifiable;
     
     protected $fillable = [
+        'business_id',
         'name',
         'contact',
     ];

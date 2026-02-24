@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\BookingStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdateBookingRequest extends FormRequest
 {
@@ -22,9 +24,10 @@ class UpdateBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-           'customer_id'  => ['required', 'exists:customers,id'],
-            'service_id'   => ['required, exists:services,id'],
-            'scheduled_at' => ['required', 'date'],
+           'customer_id'  => ['sometimes', 'exists:customers,id'],
+            'service_id'   => ['sometimes, exists:services,id'],
+            'scheduled_at' => ['sometimes', 'date'],
+            'status' => ['required', new Enum(BookingStatus::class)],
              
         ];
     }

@@ -7,8 +7,15 @@ abstract class Repository
     /**
      * This avoids boiler plate 
      */
-    public function __construct(protected Model $model)
-    {}
+    public function __construct(protected Model $model) {}
+
+    /**
+     * returns queries like query builder or model eloquent queries
+     */
+    public function query()
+    {
+        return $this->model->query();
+    }
 
     /**
      * Get all model

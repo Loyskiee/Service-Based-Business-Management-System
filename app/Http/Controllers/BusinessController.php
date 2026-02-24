@@ -28,7 +28,7 @@ class BusinessController extends Controller
          * Return a view for creating a business
          */
 
-       // return view('business.create');
+        return view('business.create');
 
     }
 
@@ -38,15 +38,10 @@ class BusinessController extends Controller
     public function store (StoreBusinessRequest $request)
     {
         /**
-         * Storing the business info
-         * 
-         * In refactoring stage, put the Store Business Request
-         */
-    
-        // Validate the request
+         * Store the business info
+         */    
         $validated = $request->validated();
-
-        // Store the business 
+        
         $business = Business::create($validated);
 
          // update([]) is used to change the business_id in the users table

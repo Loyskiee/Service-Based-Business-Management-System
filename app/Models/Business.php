@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
@@ -22,6 +23,11 @@ class Business extends Model
         return $this->hasMany(User::class);
     }
 
+    public function bokings():HasMany
+    {
+        return $this->hasMany(Booking::class);
+    }
+    
     public function customers():HasMany
     {
         return $this->hasMany(Customer::class);
@@ -32,8 +38,4 @@ class Business extends Model
         return $this->hasMany(Service::class);
     }
 
-    public function bokings():HasMany
-    {
-        return $this->hasMany(Booking::class);
-    }
 }
