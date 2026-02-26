@@ -5,10 +5,7 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
-<<<<<<< HEAD
-=======
 use App\Models\Booking;
->>>>>>> fix-recent-changes
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
 
     // OMS related routes
     Route::resource('customers', CustomerController::class) 
-    ->only('index', 'create', 'store'); 
+    ->only('index', 'create', 'store', 'show'); 
 
     Route::resource('services', ServiceController::class)
     ->only('index', 'create', 'store');
@@ -34,8 +31,16 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('dashboard', [
+        
+        'totalBookings' => Booking::count(),
+        'pendingBookings' => Booking::where('status', 'pending')->count(),
+        'upcomingBookings' => Booking::with(['customer', 'service'])
+            ->orderBy('scheduled_at', 'asc')
+            ->take(10)
+            ->get(),
+    ]);
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
