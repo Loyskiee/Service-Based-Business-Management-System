@@ -26,14 +26,14 @@ class BookingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Get list of bookings
-       $bookings = $this->bookingRepo->findByBusinessId(Auth::user()->business_id)
-       ->paginate(10);
+        public function index()
+        {
+            // Get list of bookings
+        $bookings = $this->bookingRepo->findByBusinessId(Auth::user()->business_id)
+        ->paginate(10);
 
-       return view('booking.index', compact('bookings'));
-    }
+        return view('booking.index', compact('bookings'));
+        }
 
     public function create()
     {
@@ -55,7 +55,6 @@ class BookingController extends Controller
        $validated['user_id'] = Auth::id();
 
         $this->bookingRepo->create($validated);
-
         return redirect()->route('bookings.index')
         ->with('success', 'Booking created');
     }
@@ -75,9 +74,10 @@ class BookingController extends Controller
      * Update a specific booking
      */
     public function update(UpdateBookingRequest $request, Booking $booking)
-    {
+    {   
         $booking = $this->bookingRepo->update($booking->id, $request->validated());
-        return redirect()->route('bookings.index');
+        return redirect()->route('bookings.index')
+        ->with('Success', 'Booking updated');
     }
 
     /**
