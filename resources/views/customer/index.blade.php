@@ -28,9 +28,9 @@
                         @forelse ($customers as $customer)
                             <li class="py-4 flex justify-between items-center">
                                 <div>
-                                    <h3 class="text-lg font-bold text-indigo-600 dark:text-indigo-400">
+                                    <a href="{{ route('customers.show', $customer) }}" class="text-lg font-bold text-indigo-600 dark:text-indigo-400">
                                         {{ $customer->name }}
-                                    </h3>
+                                    </a>
                                     <p class="text-sm text-gray-500">
                                         {{ $customer->contact ?? 'No contact number' }}
                                     </p>

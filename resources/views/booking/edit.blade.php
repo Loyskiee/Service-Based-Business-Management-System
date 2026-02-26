@@ -56,7 +56,8 @@
     <x-input-error class="mt-2" :messages="$errors->get('status')" />
 </div>
                     <div class="flex items-center gap-4">
-                        <x-primary-button>{{ __('Save Changes') }}</x-primary-button>
+                        <x-primary-button type="submit">
+                            {{ __('Save Changes') }}</x-primary-button>
                         <a href="{{ route('bookings.index') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">Cancel</a>
                     </div>
                 </form>
