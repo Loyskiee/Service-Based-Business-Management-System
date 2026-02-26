@@ -11,7 +11,7 @@ class StoreBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class StoreBookingRequest extends FormRequest
     {
         return [
             'customer_id'  => ['required', 'exists:customers,id'],
-            'service_id'   => ['required, exists:services,id'],
+            'service_id'   => ['required' , 'exists:services,id'],
             'scheduled_at' => ['required', 'date'],
         ];
     }
