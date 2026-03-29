@@ -13,11 +13,6 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
-     // Creating a business
-    Route::resource('business', BusinessController::class)
-    ->only('create', 'store');
-
     // OMS related routes
     Route::resource('customers', CustomerController::class) 
     ->only('index', 'create', 'store', 'show'); 
@@ -27,7 +22,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('bookings', BookingController::class);
 });
-
 
 
 Route::get('/dashboard', function () {
