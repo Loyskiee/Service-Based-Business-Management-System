@@ -25,6 +25,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
+                     @if(session('success'))
+                            <div 
+                            x-data="{ show: true }"
+                            x-init="setTimeout(() => show = false, 2000)"
+                            x-show="show"
+                            x-transition
+                            class="mb-4 p-4 rounded bg-green-100 text-green-800"
+                            >
+                                {{ session('success') }}
+                            </div>
+                    @endif
                     <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                         @forelse($bookings as $booking)
                             <li class="py-4 flex justify-between items-center">

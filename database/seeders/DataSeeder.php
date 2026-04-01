@@ -48,7 +48,6 @@ class DataSeeder extends Seeder
             'service_name' => 'Haircut',
             'price' => 150
         ]);
-    
-        
+     
   }
 }

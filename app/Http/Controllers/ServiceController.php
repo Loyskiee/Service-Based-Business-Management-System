@@ -51,11 +51,6 @@ class ServiceController extends Controller
         // create the request
         Service::create($validated);    
 
-        return back();
+        return redirect()->route('services.index');
     }
-
-
-    // add edit later
-
-    // add delete later
 }

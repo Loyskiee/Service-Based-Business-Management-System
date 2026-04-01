@@ -34,8 +34,8 @@
 
                     <div class="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                            <span class="text-gray-500">Scheduled Time:</span>
-                            <p class="text-gray-200">{{ $booking->scheduled_at }}</p>
+                            <span class="text-gray-900">Scheduled Time:</span>
+                            <p class="text-gray-600">{{ $booking->scheduled_at }}</p>
                         </div>
                     </div>
 
