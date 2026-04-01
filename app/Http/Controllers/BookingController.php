@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Enums\BookingStatus;
 use App\Http\Requests\StoreBookingRequest;
 use App\Http\Requests\UpdateBookingRequest;
 use App\Models\Booking;
@@ -56,7 +56,7 @@ class BookingController extends Controller
 
         $this->bookingRepo->create($validated);
         return redirect()->route('bookings.index')
-        ->with('success', 'Booking created');
+        ->with('booking', 'Booking created');
     }
 
     /**
@@ -77,7 +77,7 @@ class BookingController extends Controller
     {   
         $booking = $this->bookingRepo->update($booking->id, $request->validated());
         return redirect()->route('bookings.index')
-        ->with('Success', 'Booking updated');
+        ->with('booking', 'Booking updated');
     }
 
     /**
@@ -89,4 +89,12 @@ class BookingController extends Controller
 
         return redirect()->route('bookings.index');
      }
+
+    public function getByStatus(string $status)
+    {
+        $bookings = $this->bookingRepo->findByStatus(Auth::user()->business_id, BookingStatus::from($status));
+
+        return view('booking.index', compact('bookings'));
+    }
+
 }
