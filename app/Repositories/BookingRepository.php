@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Enums\BookingStatus;
 use App\Models\Booking;
 
 /**
@@ -11,54 +12,13 @@ use App\Models\Booking;
 class BookingRepository extends Repository
 {
 
-    public function __construct(protected Booking $booking){}
-
-    /**
-     * It gets all booking
-     */
-    public function all()
+    public function __construct(protected Booking $booking)
     {
-        return $this->booking->all();
+        parent::__construct($booking);
     }
 
     /**
-     * Find specific booking based on id, if not found throws an 404
-     */
-    public function find($id)
-    {
-        return $this->booking->findOrFail($id);
-    }
-    
-    /**
-     * Creates a booking
-     */
-    public function create(array $data)
-    {
-        return $this->booking->create($data);
-    }
-
-    /**
-     * Update a specific booking 
-     */
-
-    public function update($id, array $data)
-    {
-        $booking = $this->find($id);
-        $booking->update($data);
-        return $booking;
-    }
-
-    /**
-     * Delete a specific booking
-     */
-    public function delete($id)
-    {
-        $booking = $this->find($id);
-        return $booking->delete();
-    }
-
-    /**
-     * Find a specific business by id with customer, service, and user
+     * Find a specific booking by id with customer, service, and user
      *  
      */
     public function findByBusinessId($businessId)
@@ -67,5 +27,17 @@ class BookingRepository extends Repository
         ->with(['customer', 'service', 'user'])
         ->where('business_id', $businessId)
         ->latest();
+    }
+
+    // Find a specific booking with a status
+    public function findByStatus(int $businessId, BookingStatus $status)
+    {
+        return $this->booking
+        ->with(['customer', 'service', 'user'])
+        ->where('business_id', $businessId)
+        ->where('status', $status)
+        ->latest()
+        ->paginate(10);
+
     }
 }
