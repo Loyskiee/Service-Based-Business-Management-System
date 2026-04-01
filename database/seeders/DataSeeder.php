@@ -25,22 +25,24 @@ class DataSeeder extends Seeder
     {
         
        $business =  Business::create([
-            'name' => 'Kineme Shop',
-            'address' => '123 Kineme Manila City',
+            'name' => 'Example Shop',
+            'address' => '123 Example St. Manila City',
             'contact' => '09929872312',
         ]);
         
          // create an user as admin
-        $adminUser = User::factory()->for($business)->create([
+        User::factory()->for($business)->create([
             'role' => 'admin'
          ]);
 
          // create an user as staff
-       $staffUsers =  User::factory()->count(3)->for($business)->create();
+         User::factory()->count(3)->for($business)->create([
+            'role' => 'staff'
+         ]);
        
 
 
-        $customer = Customer::factory()->for($business)->create();
+         Customer::factory()->for($business)->create();
         
        // Service of kineme shop
         $service = Service::create([

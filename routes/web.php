@@ -24,9 +24,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/bookings/status/{status}', [BookingController::class, 'getByStatus']); // get specific booking based on status
     Route::resource('bookings', BookingController::class);
+    
+    // Admin only related routes
+    Route::get('/users', [UserController::class, 'index'])->name('users.index')
+    ->can('admin');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->can('admin');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store')
+    ->can('admin');
 
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
     
 });
 
